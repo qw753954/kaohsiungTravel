@@ -30,7 +30,7 @@ header {
     transform: translateY(-36px);
     border-radius: 6px;
     background-color: $white;
-    box-shadow: 0 0 5px #aaa;
+    box-shadow: 0 0 5px $light;
 }
 
 .hotZone-list {
@@ -45,7 +45,7 @@ header {
         margin-right: 20px;
         transition: .2s;
         &:hover {
-            box-shadow: 3px 3px 5px #aaa;
+            box-shadow: 3px 3px 5px $light;
         }
     }
 }
@@ -69,9 +69,9 @@ main {
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        background-color: #f7f7f7;
+        background-color: $lighter;
         border: 3px solid $primary;
-        outline: 7px solid #f7f7f7;
+        outline: 7px solid $lighter;
     }
     &:after {
         width: 0px;
@@ -97,7 +97,7 @@ main {
     width: 48%;
     margin-bottom: 36px;
     background-color: $white;
-    box-shadow: 0 0 5px #aaa;
+    box-shadow: 0 0 5px $light;
 }
 
 .card-header,
@@ -222,9 +222,13 @@ footer {
                 border-bottom: 1px dashed $highlight;
                 transition: .4s;
             }
+            &:hover {
+                color: rgba($highlight, .8);
+            }
             &:hover::after {
                 left: 0;
                 right: 0;
+                border-color: rgba($highlight, .7);
             }
         }
     }
@@ -235,11 +239,11 @@ footer {
     bottom: 50px;
     right: 50px;
     &:hover {
-        animation: gooo .5s infinite linear;
+        animation: gogo .7s infinite linear;
     }
 }
 
-@keyframes gooo {
+@keyframes gogo {
     0% {
         transform: translateY(0);
     }
@@ -279,10 +283,10 @@ footer {
         justify-content: center;
     }
     .card-item {
-        width: 100%;
+        width: 90%;
     }
     #go-top {
-        bottom: 20px;
         right: 10px;
+        bottom: 20px;
     }
 }

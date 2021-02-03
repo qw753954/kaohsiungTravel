@@ -152,7 +152,7 @@ h3 {
 h1 {
   font-size: 2.5rem;
   letter-spacing: 2px;
-  text-shadow: 1px 1px 2px #222;
+  text-shadow: 1px 1px 2px #2c2c2c;
   margin-bottom: 80px;
 }
 
@@ -500,9 +500,14 @@ footer small a::after {
   transition: .4s;
 }
 
+footer small a:hover {
+  color: rgba(255, 211, 102, 0.8);
+}
+
 footer small a:hover::after {
   left: 0;
   right: 0;
+  border-color: rgba(255, 211, 102, 0.7);
 }
 
 #go-top {
@@ -512,11 +517,11 @@ footer small a:hover::after {
 }
 
 #go-top:hover {
-  -webkit-animation: gooo .5s infinite linear;
-          animation: gooo .5s infinite linear;
+  -webkit-animation: gogo .7s infinite linear;
+          animation: gogo .7s infinite linear;
 }
 
-@-webkit-keyframes gooo {
+@-webkit-keyframes gogo {
   0% {
     -webkit-transform: translateY(0);
             transform: translateY(0);
@@ -531,7 +536,7 @@ footer small a:hover::after {
   }
 }
 
-@keyframes gooo {
+@keyframes gogo {
   0% {
     -webkit-transform: translateY(0);
             transform: translateY(0);
@@ -578,11 +583,11 @@ footer small a:hover::after {
             justify-content: center;
   }
   .card-item {
-    width: 100%;
+    width: 90%;
   }
   #go-top {
-    bottom: 20px;
     right: 10px;
+    bottom: 20px;
   }
 }
 /*# sourceMappingURL=all.css.map */

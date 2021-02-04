@@ -69,12 +69,10 @@ function updateList(zoneName) {
 }
 
 // event, 切換下拉式列表的項目
-function zoneListChange(e) {
+zoneSelect.addEventListener('change', function(e) {
     let totalZoneSelectValue = e.target.value;
-    // console.log(thisValue);
     updateList(totalZoneSelectValue);
-}
-zoneSelect.addEventListener('change', zoneListChange, false);
+});
 
 // event, 點擊熱門區域的按鈕
 hotZone.addEventListener('click', function(e) {

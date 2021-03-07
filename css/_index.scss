@@ -1,4 +1,4 @@
-header {
+.header {
     height: 400px;
     background: url('../image/banner.png') no-repeat center/ cover;
     text-align: center;
@@ -9,7 +9,13 @@ header {
     align-items: center;
 }
 
-#drop-down {
+.title {
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px $dark;
+    margin-bottom: 80px;
+}
+
+.drop-down {
     min-width: 450px;
     padding: 12px 10px;
     font-size: 1rem;
@@ -25,12 +31,13 @@ header {
 }
 
 .hotZone {
+    max-width: 800px;
     padding: 25px;
-    margin-bottom: 40px;
-    transform: translateY(-36px);
+    margin: 0 auto 40px;
     border-radius: 6px;
     background-color: $white;
     box-shadow: 0 0 5px $light;
+    transform: translateY(-36px);
 }
 
 .hotZone-list {
@@ -38,22 +45,22 @@ header {
     flex-wrap: wrap;
     button {
         color: $white;
-        padding: 10px 30px;
-        font-size: 1.25rem;
         font-weight: 700;
-        border-radius: 5px;
+        padding: 10px 30px;
         margin-right: 20px;
+        border-radius: 5px;
         transition: .2s;
         &:hover {
-            box-shadow: 3px 3px 5px $light;
+            box-shadow: 0 0 8px $light;
         }
     }
 }
 
-main {
+.content {
     position: relative;
-    padding-top: 96px;
-    padding-bottom: 96px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 96px 30px;
     border-top: 3px dashed $primary;
     &:before,
     &::after {
@@ -166,7 +173,7 @@ main {
             display: flex;
             align-items: center;
         }
-        div:last-of-type {
+        .ticket-info {
             justify-content: flex-end;
         }
     }
@@ -178,58 +185,54 @@ main {
 .pagination {
     display: flex;
     justify-content: center;
-    a {
-        display: block;
+    .link {
         padding: 15px 20px;
         margin: 0 2px;
         border-radius: 10px;
         transition: .2s;
-        &:hover {
-            color: $white;
-            background-color: $primary;
-        }
-        &.active {
-            color: $primary;
-            background-color: transparent;
-            position: relative;
-        }
+    }
+    a.link:hover {
+        color: $white;
+        background-color: $primary;
+    }
+    a.link.active {
+        color: $primary;
+        background-color: transparent;
+        position: relative;
     }
 }
 
-footer {
+.footer {
     padding: 32px 0;
-    font-size: 1.25rem;
     text-align: center;
     color: $white;
     background-color: $primary;
     p {
+        margin-bottom: 8px;
         letter-spacing: 1.2px;
     }
     small {
-        display: block;
-        font-size: 16px;
         color: $highlight;
-        margin-top: 16px;
-        a {
-            color: $highlight;
-            position: relative;
-            &::after {
-                content: '';
-                position: absolute;
-                left: 50%;
-                right: 50%;
-                bottom: -5px;
-                border-bottom: 1px dashed $highlight;
-                transition: .4s;
-            }
-            &:hover {
-                color: rgba($highlight, .8);
-            }
-            &:hover::after {
-                left: 0;
-                right: 0;
-                border-color: rgba($highlight, .7);
-            }
+    }
+    a {
+        color: $highlight;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            right: 50%;
+            bottom: -5px;
+            border-bottom: 1px dashed $highlight;
+            transition: .4s;
+        }
+        &:hover {
+            color: rgba($highlight, .8);
+        }
+        &:hover::after {
+            left: 0;
+            right: 0;
+            border-color: rgba($highlight, .7);
         }
     }
 }
@@ -238,6 +241,7 @@ footer {
     position: fixed;
     bottom: 50px;
     right: 50px;
+    display: none;
     &:hover {
         animation: gogo .7s infinite linear;
     }
@@ -262,7 +266,7 @@ footer {
     #drop-down {
         min-width: 300px;
     }
-    h3 {
+    .hotZone-title {
         font-size: 1.25rem;
     }
     .hotZone-list {

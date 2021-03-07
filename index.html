@@ -5,87 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>高雄旅遊資訊網</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/all.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>高雄旅遊資訊</h1>
-        <select name="" id="drop-down">
-            <option value="" disabled selected>-- 請選擇行政區 --</option>
-            <option value="全部行政區">全部行政區</option>
-            <option value="三民區">三民區</option>
-            <option value="大樹區">大樹區</option>
-            <option value="小港區">小港區</option>
-            <option value="仁武區">仁武區</option>
-            <option value="內門區">內門區</option>
-            <option value="六龜區">六龜區</option>
-            <option value="左營區">左營區</option>
-            <option value="田寮區">田寮區</option>
-            <option value="甲仙區">甲仙區</option>
-            <option value="杉林區">杉林區</option>
-            <option value="岡山區">岡山區</option>
-            <option value="前金區">前金區</option>
-            <option value="前鎮區">前鎮區</option>
-            <option value="美濃區">美濃區</option>
-            <option value="苓雅區">苓雅區</option>
-            <option value="茂林區">茂林區</option>
-            <option value="茄萣區">茄萣區</option>
-            <option value="梓官區">梓官區</option>
-            <option value="新興區">新興區</option>
-            <option value="楠梓區">楠梓區</option>
-            <option value="鼓山區">鼓山區</option>
-            <option value="旗津區">旗津區</option>
-            <option value="鳳山區">鳳山區</option>
+    <header class="header">
+        <h1 class="title">高雄旅遊資訊網</h1>
+        <select name="kaoZone" class="drop-down" id="drop-down">
         </select>
     </header>
 
     <nav class="hotZone">
-        <h3>熱門行政區</h3>
+        <h2 class="h3 hotZone-title">熱門行政區</h2>
         <ul class="hotZone-list">
-            <li><button value="苓雅區" style="background-color: #559AC8;">苓雅區</button></li>
-            <li><button value="三民區" style="background-color: #FFA782;">三民區</button></li>
-            <li><button value="岡山區" style="background-color: #F5D105;">岡山區</button></li>
-            <li><button value="大樹區" style="background-color: #3fc296;">大樹區</button></li>
+            <li><button value="苓雅區" class="h4" style="background-color: #559AC8;">苓雅區</button></li>
+            <li><button value="三民區" class="h4" style="background-color: #FFA782;">三民區</button></li>
+            <li><button value="岡山區" class="h4" style="background-color: #F5D105;">岡山區</button></li>
+            <li><button value="大樹區" class="h4" style="background-color: #3fc296;">大樹區</button></li>
         </ul>
     </nav>
 
-    <main>
+    <main class="content">
         <h2 class="zone-title">全部行政區</h2>
 
         <ul class="card-list">
         </ul>
 
-        <ul class="pagination">
-            <li>
-                <a href="#">Prev</a>
-            </li>
-            <li>
-                <a href="#" class="active">1</a>
-            </li>
-            <li>
-                <a href="#">2</a>
-            </li>
-            <li>
-                <a href="#">3</a>
-            </li>
-            <li>
-                <a href="#">Next</a>
-            </li>
+        <ul class="pagination" id="pageid">
         </ul>
     </main>
 
-    <footer>
-        <p>高雄旅遊網</p>
+    <footer class="footer">
+        <p class="h4">高雄旅遊網</p>
         <small>
             資料來源：<a href="https://api.kcg.gov.tw/" target="_blank">高雄市政府</a>
         </small>
     </footer>
 
-    <a href="#" id="go-top"><img src="image/btn_goTop.png" alt="goTop~"></a>
+    <a href="#" id="go-top"><img src="image/btn_goTop.png" alt="goTop"></a>
 
 
 

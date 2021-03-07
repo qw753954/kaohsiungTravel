@@ -1,0 +1,250 @@
+const zoneList = document.querySelector('.card-list');
+const zoneTitle = document.querySelector('.zone-title');
+const zoneSelect = document.querySelector('#drop-down');
+const hotZone = document.querySelector('.hotZone-list');
+const pageId = document.querySelector('#pageId');
+const goTop = document.querySelector('#go-top');
+let data = [];
+
+// 撈遠端資料
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json', true);
+xhr.send(null);
+
+xhr.onload = function() {
+    let strJSON = JSON.parse(xhr.responseText);
+    data = strJSON.result.records;
+    console.log('測試在 onload 函式呼叫 data: ', data, Array.isArray(data));
+
+    /* 當進到頁面一開始就會執行的事情 (函式要被呼叫才會執行裡面的程式碼) */
+    // 1) 下拉式選單載入各選項
+    addOption();
+    // 2) 將「全部」地區景點顯示在頁面 (邏輯: 抓出預設 --請選擇行政區-- 的 value 值 = '')
+    updateList(zoneSelect.value);
+}
+
+
+
+
+// view, 把 "各個地區選項加到 dropdown" 並渲染到介面上
+function addOption() {
+    // 撈出 json 中所有的 Zone 值，並存進陣列中
+    let zoneAry = [];
+    for (let i = 0; i < data.length; i++) {
+        zoneAry.push(data[i].Zone);
+    }
+
+    // 過濾掉重複的陣列索引值
+    // 參考 -> https://www.delftstack.com/zh-tw/howto/javascript/javascript-remove-duplicates-from-an-array/
+    var newZoneAry = zoneAry.filter((ele, pos) => zoneAry.indexOf(ele) == pos);
+    console.log('已移除陣列的重複元素: ', newZoneAry);
+
+    // 新增到 '下拉式選單' 元件中，就不需再到 HTML 內手打每個 option 地區名稱
+    let strOption = '<option value="" disabled selected>-- 請選擇行政區 --</option> <option value="全部行政區">全部行政區</option>';
+    for (let i = 0; i < newZoneAry.length; i++) {
+        strOption += `<option value="${newZoneAry[i]}">${newZoneAry[i]}</option>`;
+    }
+    zoneSelect.innerHTML = strOption;
+}
+
+
+
+// view, 把 "行政區景點列表" 渲染到介面上
+function updateList(zoneName) {
+    console.log('測試在別的函式呼叫 data: ', data);
+    console.log('本次被呼叫的 updateList 函式的 ZoneName 為: ' + zoneName);
+
+    let ticketImg;
+    let strList = '';
+
+    for (let i = 0; i < data.length; i++) {
+        // <option> value 總共會有這三個可能性
+        if (zoneName === data[i].Zone || zoneName === '全部行政區' || zoneName === '') {
+
+            // 此判斷會決定 zoneTitle(h2) 的標題顯示
+            if (zoneName === data[i].Zone) {
+                zoneTitle.textContent = zoneName;
+            } else {
+                zoneTitle.textContent = '全部行政區';
+            }
+
+            // 此判斷會決定 .ticket-info 的顯示
+            if (data[i].Ticketinfo !== '') {
+                ticketImg = `
+                <div class="ticket-info">
+                    <img src="image/icons_tag.png" class="tag-Pic">
+                    <p class="price">${data[i].Ticketinfo}</p>
+                </div>`;
+            } else {
+                ticketImg = '';
+            }
+
+            // 會根據條件式的各 <option> value 來決定地區列表的呈現
+            // 當 value 為全部行政區或空值，就會顯示全部的景點資訊；data[i].Zone 則是呈現對應名稱的資料
+            strList +=
+                `<li class="card-item">
+                    <a href="#" class="card-header" style="background-image: url( ${data[i].Picture1} );">
+                        <h4>${data[i].Name}</h4>
+                        <p>${data[i].Zone}</p>
+                    </a>
+                    <ul class="card-body">
+                        <li>
+                            <img src="image/icons_clock.png">
+                            <p>${data[i].Opentime}</p>
+                        </li>
+                        <li>
+                            <img src="image/icons_pin.png">
+                            <p>${data[i].Add}</p>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="image/icons_phone.png">
+                                <a href="tel:+${data[i].Tel}">${data[i].Tel}</a>
+                            </div>
+                            ${ticketImg}
+                        </li>
+                    </ul>
+                </li>`;
+        }
+        zoneList.innerHTML = strList;
+    }
+}
+
+// event, 切換下拉式列表的項目
+zoneSelect.addEventListener('change', function(e) {
+    let totalZoneSelectValue = e.target.value;
+    updateList(totalZoneSelectValue);
+});
+
+// event, 點擊熱門區域的按鈕
+hotZone.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (e.target.nodeName !== 'BUTTON') {
+        return;
+    }
+    let hotZoneBtnValue = e.target.value;
+    updateList(hotZoneBtnValue);
+});
+
+
+
+// event, gotop 在某特定 y 軸座標顯示
+document.addEventListener("scroll", function() {
+    if (window.scrollY > 850) {
+        goTop.style.display = "block";
+    } else {
+        goTop.style.display = "none";
+    }
+});
+
+
+
+// event, gotop 點擊會回到網頁最上方
+goTop.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    })
+})
+
+
+const jsonUrl = 'https://raw.githubusercontent.com/hsiangfeng/JSHomeWork/master/JSON/datastore_search.json';
+
+// 分頁
+fetch(jsonUrl, { method: 'get' })
+    .then((response) => {
+        return response.json();
+    }).then((data) => {
+        jsonData = data.result.records;
+        pagination(jsonData, 1);
+    })
+
+function pagination(jsonData, nowPage) {
+    console.log(nowPage);
+    // 取得全部資料長度
+    const dataTotal = jsonData.length;
+
+    // 設定要顯示在畫面上的資料數量
+    // 預設每一頁只顯示 5 筆資料。
+    const perpage = 5;
+
+    // page 按鈕總數量公式 總資料數量 / 每一頁要顯示的資料
+    // 這邊要注意，因為有可能會出現餘數，所以要無條件進位。
+    const pageTotal = Math.ceil(dataTotal / perpage);
+
+    // 當前頁數，對應現在當前頁數
+    let currentPage = nowPage;
+
+    // 因為要避免當前頁數筆總頁數還要多，假設今天總頁數是 3 筆，就不可能是 4 或 5
+    // 所以要在寫入一個判斷避免這種狀況。
+    // 當"當前頁數"比"總頁數"大的時候，"當前頁數"就等於"總頁數"
+    // 注意這一行在最前面並不是透過 nowPage 傳入賦予與 currentPage，所以才會寫這一個判斷式，但主要是預防一些無法預期的狀況，例如：nowPage 突然發神經？！
+    if (currentPage > pageTotal) {
+        currentPage = pageTotal;
+    }
+
+    // 由前面可知 最小數字為 6 ，所以用答案來回推公式。
+    const minData = (currentPage * perpage) - perpage + 1;
+    const maxData = (currentPage * perpage);
+
+    // 先建立新陣列
+    const data = [];
+    // 這邊將會使用 ES6 forEach 做資料處理
+    // 首先必須使用索引來判斷資料位子，所以要使用 index
+    jsonData.forEach((item, index) => {
+            // 獲取陣列索引，但因為索引是從 0 開始所以要 +1。
+            const num = index + 1;
+            // 這邊判斷式會稍微複雜一點
+            // 當 num 比 minData 大且又小於 maxData 就push進去新陣列。
+            if (num >= minData && num <= maxData) {
+                data.push(item);
+            }
+        })
+        // 用物件方式來傳遞資料
+    const page = {
+        pageTotal,
+        currentPage,
+        hasPage: currentPage > 1,
+        hasNext: currentPage < pageTotal,
+    }
+    displayData(data);
+    pageBtn(page);
+}
+
+function pageBtn(page) {
+    let str = '';
+    const total = page.pageTotal;
+
+    if (page.hasPage) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="${Number(page.currentPage) - 1}">Previous</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+    }
+
+
+    for (let i = 1; i <= total; i++) {
+        if (Number(page.currentPage) === i) {
+            str += `<li class="page-item active"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
+        } else {
+            str += `<li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
+        }
+    };
+
+    if (page.hasNext) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="${Number(page.currentPage) + 1}">Next</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+    }
+
+    pageId.innerHTML = str;
+}
+
+function switchPage(e) {
+    e.preventDefault();
+    if (e.target.nodeName !== 'A') return;
+    const page = e.target.dataset.page;
+    pagination(jsonData, page);
+}
+
+pageId.addEventListener('click', switchPage);

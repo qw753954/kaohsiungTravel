@@ -130,6 +130,16 @@ table {
   border-spacing: 0;
 }
 
+::-moz-selection {
+  background-color: #559AC8;
+  color: #fff;
+}
+
+::selection {
+  background-color: #559AC8;
+  color: #fff;
+}
+
 *,
 *::after,
 *::before {
@@ -149,24 +159,25 @@ h3 {
   font-weight: 700;
 }
 
-h1 {
+h1,
+.h1 {
   font-size: 2.5rem;
-  letter-spacing: 2px;
-  text-shadow: 1px 1px 2px #2c2c2c;
-  margin-bottom: 80px;
 }
 
-h2 {
+h2,
+.h2 {
   font-size: 2.25rem;
   margin-bottom: 36px;
 }
 
-h3 {
+h3,
+.h3 {
   font-size: 1.5rem;
   margin-bottom: 16px;
 }
 
-h4 {
+h4,
+.h4 {
   font-size: 1.25rem;
 }
 
@@ -174,6 +185,10 @@ a {
   color: initial;
   display: inline-block;
   text-decoration: none;
+}
+
+small {
+  width: 80%;
 }
 
 button {
@@ -185,19 +200,7 @@ button:focus {
   outline: none;
 }
 
-nav {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-main {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-header {
+.header {
   height: 400px;
   background: url("../image/banner.png") no-repeat center/cover;
   text-align: center;
@@ -217,7 +220,13 @@ header {
           align-items: center;
 }
 
-#drop-down {
+.title {
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 2px #2c2c2c;
+  margin-bottom: 80px;
+}
+
+.drop-down {
   min-width: 450px;
   padding: 12px 10px;
   font-size: 1rem;
@@ -230,19 +239,20 @@ header {
   background: url("../image/icons_down.png") rgba(255, 255, 255, 0.7) no-repeat 97% center;
 }
 
-#drop-down:focus {
+.drop-down:focus {
   outline: none;
 }
 
 .hotZone {
+  max-width: 800px;
   padding: 25px;
-  margin-bottom: 40px;
-  -webkit-transform: translateY(-36px);
-          transform: translateY(-36px);
+  margin: 0 auto 40px;
   border-radius: 6px;
   background-color: #fff;
   -webkit-box-shadow: 0 0 5px #aaa;
           box-shadow: 0 0 5px #aaa;
+  -webkit-transform: translateY(-36px);
+          transform: translateY(-36px);
 }
 
 .hotZone-list {
@@ -255,28 +265,28 @@ header {
 
 .hotZone-list button {
   color: #fff;
-  padding: 10px 30px;
-  font-size: 1.25rem;
   font-weight: 700;
-  border-radius: 5px;
+  padding: 10px 30px;
   margin-right: 20px;
+  border-radius: 5px;
   -webkit-transition: .2s;
   transition: .2s;
 }
 
 .hotZone-list button:hover {
-  -webkit-box-shadow: 3px 3px 5px #aaa;
-          box-shadow: 3px 3px 5px #aaa;
+  -webkit-box-shadow: 0 0 8px #aaa;
+          box-shadow: 0 0 8px #aaa;
 }
 
-main {
+.content {
   position: relative;
-  padding-top: 96px;
-  padding-bottom: 96px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 96px 30px;
   border-top: 3px dashed #559AC8;
 }
 
-main:before, main::after {
+.content:before, .content::after {
   content: '';
   position: absolute;
   left: 0;
@@ -287,7 +297,7 @@ main:before, main::after {
   margin: auto;
 }
 
-main:before {
+.content:before {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -296,7 +306,7 @@ main:before {
   outline: 7px solid #f7f7f7;
 }
 
-main:after {
+.content:after {
   width: 0px;
   border-top: 9px solid #559AC8;
   border-left: 6px solid transparent;
@@ -426,7 +436,7 @@ main:after {
           align-items: center;
 }
 
-.card-body li:last-of-type div:last-of-type {
+.card-body li:last-of-type .ticket-info {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
@@ -445,8 +455,7 @@ main:after {
           justify-content: center;
 }
 
-.pagination a {
-  display: block;
+.pagination .link {
   padding: 15px 20px;
   margin: 0 2px;
   border-radius: 10px;
@@ -454,42 +463,39 @@ main:after {
   transition: .2s;
 }
 
-.pagination a:hover {
+.pagination a.link:hover {
   color: #fff;
   background-color: #559AC8;
 }
 
-.pagination a.active {
+.pagination a.link.active {
   color: #559AC8;
   background-color: transparent;
   position: relative;
 }
 
-footer {
+.footer {
   padding: 32px 0;
-  font-size: 1.25rem;
   text-align: center;
   color: #fff;
   background-color: #559AC8;
 }
 
-footer p {
+.footer p {
+  margin-bottom: 8px;
   letter-spacing: 1.2px;
 }
 
-footer small {
-  display: block;
-  font-size: 16px;
+.footer small {
   color: #FFD366;
-  margin-top: 16px;
 }
 
-footer small a {
+.footer a {
   color: #FFD366;
   position: relative;
 }
 
-footer small a::after {
+.footer a::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -500,11 +506,11 @@ footer small a::after {
   transition: .4s;
 }
 
-footer small a:hover {
+.footer a:hover {
   color: rgba(255, 211, 102, 0.8);
 }
 
-footer small a:hover::after {
+.footer a:hover::after {
   left: 0;
   right: 0;
   border-color: rgba(255, 211, 102, 0.7);
@@ -514,6 +520,7 @@ footer small a:hover::after {
   position: fixed;
   bottom: 50px;
   right: 50px;
+  display: none;
 }
 
 #go-top:hover {
@@ -558,7 +565,7 @@ footer small a:hover::after {
   #drop-down {
     min-width: 300px;
   }
-  h3 {
+  .hotZone-title {
     font-size: 1.25rem;
   }
   .hotZone-list {
